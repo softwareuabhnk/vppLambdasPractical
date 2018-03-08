@@ -6,11 +6,11 @@ public class BookCollection {
 	
 	private List<Book> books;
 	
-	public List<Book> findBooks(Predicate<Book> searchCriteria) {
+	public List<Book> findBooks(Predicate<Book> lambdaSearchCriteria) {
 		List<Book> results = new ArrayList<Book>();
 		
 		for (Book nextBook : books) {
-			if (searchCriteria.test(nextBook)) {
+			if (lambdaSearchCriteria.test(nextBook)) {
 				results.add(nextBook);
 			}
 		}

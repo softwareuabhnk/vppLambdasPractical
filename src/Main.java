@@ -10,7 +10,7 @@ public class Main {
 		
         //Predicate<Book> myLambda = book -> book.getTitle().toLowerCase().contains("men");
 		
-		// Passing the the lambda in to the function
+		// Passing the the lambda directly in to the function
 		List<Book> foundBooks = bc.findBooks(book -> book.getTitle().toLowerCase().contains("men"));
 	
 		for (Book nextBook : foundBooks) {
