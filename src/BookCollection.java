@@ -1,13 +1,37 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class BookCollection {
 	
 	private List<Book> books;
 	
+	public Long howManyMatchingBooks(Predicate<Book> searchCriteria) {
+		
+		return books.stream().filter(searchCriteria).count();
+	}
+	
+	
+	public Map<Integer, String> findBookTitles(Predicate<Book> searchCriteria){
+		
+		
+		//List<Book> results = findBooksWithStream(searchCriteria);	
+		//Map<Integer, String> myMap = results.stream().collect(Collectors.toMap((Book b) -> b.getId(), (Book b) -> b.getTitle()));
+		//return myMap;
+		
+		// Cleaned it up into one single line
+		return findBooksWithStream(searchCriteria).stream().collect(Collectors.toMap((Book b) -> b.getId(), (Book b) -> b.getTitle()));
+	
+	}
+	
 	public List<Book> findBooks(Predicate<Book> lambdaSearchCriteria) {
 		List<Book> results = new ArrayList<Book>();
+		
+		results = books.stream().filter(lambdaSearchCriteria).collect(Collectors.toList());
+		
+		
 		
 		for (Book nextBook : books) {
 			if (lambdaSearchCriteria.test(nextBook)) {
@@ -17,6 +41,12 @@ public class BookCollection {
 		
 		return results;
 	}
+		
+		public List<Book> findBooksWithStream(Predicate<Book> lambdaSearchCriteria) {
+				
+		return books.stream().filter(lambdaSearchCriteria).collect(Collectors.toList());
+						
+		}
 	
 	public BookCollection() {
 		 books = new ArrayList<Book>();
